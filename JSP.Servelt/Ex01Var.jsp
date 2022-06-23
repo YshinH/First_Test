@@ -34,9 +34,7 @@
 	<p>ar[1]의 값 <%=ar[1] %></p>
 	<p>ar[2]의 값 <%=ar[2] %></p>
 	<p>ar[3]의 값 <%=ar[3] %></p>
-<%-- 	<% for (int i = 1; i < ar.length; i++)%> <% --%>
-<%-- 		ar[i] = ar.length; %> --%>
-<!-- 	<p></p>	 -->
+	<p><%=Arrays.toString(ar) %></p>
 	
 	
 		
