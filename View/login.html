@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+*{
+	margin: 0px auto;
+	padding: 0px auto;
+}	
+	
+	form{
+	 width: 80%;
+	 top: 50%;
+	 left:50%;
+	 
+	 
+	}
+	
+	fieldset {
+	margin-top : 10%;
+	width: 50%;
+	height: 100%;
+	text-align: center;
+	border: 0px white;
+	background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+	
+}
+
+
+
+</style>
+</head>
+<body>
+	
+	<form action="#" method="get" id="logForm" name="logForm">
+	
+		<fieldset>
+			<h1>로그인</h1>
+			<img alt="이미지" src="http://picsum.photos/250/250">
+			<br>
+			<br>
+			<table>
+	
+				<tr>
+					<td>
+						<label for="id">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>		
+					</td>
+					<td>		
+							<input type="text" name="id" id="id" maxlength="15"
+							 placeholder="아이디를 입력하세요" onclick="this.placeholder='';">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+						<label for="pw">비밀&nbsp;번호</label>
+					</td>
+					<td>			
+						<input type="password" name="pw" id="pw" maxlength="15"
+							placeholder="비밀번호를 입력하세요" onclick="this.placeholder='';">
+					</td>
+				</tr>	
+			</table>
+			<br>
+		
+		<input type="submit" value="Login" class="login">
+		<input type="reset" value="Reset" class="reset">
+		
+		</fieldset>
+	</form>
+	
+</body>
+</html>
