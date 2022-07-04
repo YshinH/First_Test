@@ -7,11 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class StudentDAO {
 	Connection conn;
 	PreparedStatement ps;
 	ResultSet rs;
 	String sql;
+	StudentDTO dto;
+	
 	//ArrayList<StudentDTO> 를 10건 리턴하는 메소드 작성
 	//getManualList();
 	
@@ -114,6 +118,55 @@ public class StudentDAO {
 		}
 		
 		return list;
+	}
+	
+	//HttpServletRequest req = Controller.req;
+	//String abc = Controller."";
+	//1.String student_no, user_id; ★★★★★★재활용이 가능한구조
+									//2번.HttpServletRequest req						
+	public StudentDTO getStudentInfo(String student_no, String user_id) {// 해당하는 메소드가 실행될때 필요한 변수를 어떤곳에 입력받아서 사용하기.
+		//데이터베이스에 접근해서 학생 한명의 정보를 얻어오는 비지니스로직을 구현(데이터 한건 얻어오기)
+//		StudentDTO dto = null; 전역변수로 빼줌
+		getConn();
+		sql = "SELECT u.*, s.student_name FROM USER_INFO u left outer join STUDENT s ON u.STUDENT_NO = s.STUDENT_NO WHERE u.student_no = ? AND u.user_id = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, student_no);
+			ps.setString(2, user_id);
+//			ps.setString(1,req.getParameter("student_no"));	req를 이용하면 항상 req.getparameter가 있는 경우에만 이용이가능
+															//재활용이나 여러 플랫폼에서 활용하기엔 불편함
+//			ps.setString(2,req.getParameter("user_id"));
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				System.out.println("DAO에서 DTO한건의 내용을 조회중" + rs.getString("student_name"));
+				dto = new StudentDTO(rs.getString("student_name"),
+									 rs.getString("user_id"), 
+									 rs.getString("user_pw"), 
+									 rs.getString("first_name"), 
+									 rs.getString("last_name"), 
+									 rs.getInt("student_no"));
+				dto.setAdmin_yn(rs.getString("admin_yn"));
+				dto.setMoney(rs.getInt("money"));
+				dto.setCreate_ymd(rs.getString("create_ymd"));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}finally {
+			dbClose();
+		}
+
+		return dto;
+		
+		
+	}
+
+	public StudentDTO getStudentUpdate(String student_no, String user_id) {
+		conn = getConn();
+		 
+		
+		return null;
 	}
 	
 	
