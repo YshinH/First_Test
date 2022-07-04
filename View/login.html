@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script>
+
+$(document).ready(function() {
+	
+	var id = document.getElementById("id");
+	var pw = document.getElementById("pw");
+
+	var idCheck;
+
+	document.getElementById("logForm").onsubmit = function () {	
+
+		if (!id.value) {
+			alert("아이디를 입력해주세요");
+				id.focus();
+			return false;
+		}
+		
+		if (!pw.value) {
+
+			alert("패스워드를 입력해주세요");
+			pw.focus();
+			return false;
+		}
+		
+		idCheck = false; //중요
+//------------------------------------------------------------------------------- 
+		$.ajax({
+			
+			url: "loginCheck.json",
+			type: "post",
+			dataType: "json",
+			async : false,
+			
+			success: function(result) {
+				
+				$(result).each(function(key, value) {
+					
+				if (id.value == (value.id) && pw.value == (value.pw)) {
+						idCheck = true;
+
+					} //if
+					
+				}); //each
+				
+			} //success
+			
+		}); //ajax
+
+//---------------------------------------------------------------------------------
+	//로그인완료/실패
+		if (idCheck == true) {
+			alert(id.value + "님 로그인하셨습니다");
+			location.href="index.html";
+			return false;
+		} else {
+			alert("존재하지 않은 아이디이거나 패스워드를 잘못 입력하셨습니다.");
+			id.value="";
+			pw.value="";
+			id.focus();
+			return false;
+		};  //if
+	
+	} //document.loginForm.onsubmit
+	
+	
+	
+	
+	//로그인 취소 
+	 document.getElementById("logForm").onreset = function () {
+		var result =confirm("로그인을 취소하겠습니까?"); 
+		if (result) { 
+			alert("로그인이 취소 되었습니다."); 
+			id.value ="";  
+			pw.value ="";
+			userId.focus();
+			location.href="login1.html";			
+			return false;
+		} else {
+			id.focus();
+			return false;
+		}
+		 
+	}//onreset
+}); //ready
+
+</script>
+
+<style type="text/css">
+*{
+	margin: 0px auto;
+	padding: 0px auto;
+}	
+	
+	form{
+	 width: 80%;
+	 top: 50%;
+	 left:50%;
+	 
+	 
+	}
+	
+	fieldset {
+	margin-top : 10%;
+	width: 20%;
+	height: 100%;
+	text-align: center;
+	border: 0px white;
+ 	background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+ 	box-shadow: 3px 3px 3px 3px gray;
+ 	
+}
+
+label, span {
+	color: orange;
+	font-weight: bolder;
+	
+}
+
+
+#id, #pw{
+	border: none;
+	
+}
+
+#loginBtn, #reset{
+	font-size: medium;
+	font-weight:bolder;
+	border-radius: 10px 10px 10px 10px;
+	border: none;
+	background-color: white;
+}
+
+
+</style>
+</head>
+<body>
+	
+	<form action="#" method="post" id="logForm" name="logForm">
+	
+		<fieldset>
+			<h1>로그인</h1>
+			<img alt="이미지" src="http://picsum.photos/250/250">
+			<br>
+			<br>
+			<table>
+	
+				<tr>
+					<td>
+						<label for="id">아&nbsp;&nbsp;이&nbsp;&nbsp;디</label>		
+					</td>
+					<td>		
+							<input type="text" name="id" id="id" maxlength="15"
+							 placeholder="아이디를 입력하세요" onclick="this.placeholder='';">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+						<label for="pw" >비밀&nbsp;번호</label>
+					</td>
+					<td>			
+						<input type="password" name="pw" id="pw" maxlength="15"
+							placeholder="비밀번호를 입력하세요" onclick="this.placeholder='';">
+					</td>
+				</tr>	
+			</table>
+			<br>
+		
+		<input type="submit" value="Login" id="loginBtn" >
+		<input type="reset" value="Reset" id="reset">
+		<br>
+		<br>
+		
+		<span>잠깐! 회원이 아니세요?<br> 
+		<a href="join1.html">가입</a>하세요!</span>
+		
+		</fieldset>
+	</form>
+	
+</body>
+</html>
