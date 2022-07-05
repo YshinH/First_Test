@@ -35,7 +35,7 @@
 
                 <li><a href="list.st">JDBC(학생목록조회)</a></li>
 
-                <li><a href="#">Mybatis(사원목록조회)</a></li>
+                <li><a href="list.hr">Mybatis(사원목록조회)</a></li>
 
                 <li><a href="#">JSTL사용</a></li>
 

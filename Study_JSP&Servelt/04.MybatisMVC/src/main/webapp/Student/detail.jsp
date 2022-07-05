@@ -43,7 +43,7 @@ td{
 		
 		<tr>
 			<th>학생번호</th>
-			<td><a> <%=dto.getStudent_no() %></a></td>
+			<td><a > <%=dto.getStudent_no() %></a></td>
 		</tr>
 		<tr>	
 			<th>학생이름</th>
@@ -65,20 +65,49 @@ td{
 			<th> 요청 </th>
 			<td><!-- 폼태그든 앵커태그든 사용해서 컨트롤러로 값 넘기기 -->
 				<form action="detail.st" method="get">
-					<input type="hidden" name="student_no" value="<%=dto.getStudent_no()%>"> 
-					<input type="hidden" name="user_id" value="<%=dto.getUser_id()%>"> 
+					<input type="hidden" id="student_no" name="student_no" value="<%=dto.getStudent_no()%>"> 
+					<input type="hidden" id="user_id"  name="user_id" value="<%=dto.getUser_id()%>"> 
 					<input type="submit" value="detail.st로 요청">
 				</form>
 			</td>
 		</tr>
 		
 		<tr>
-			<th style="background-color: aqua;;"><a href="update.st?student_no=<%=dto.getStudent_no()%>&user_id=<%=dto.getUser_id()%>">수정하기</a></th>
-			<td style="background-color: aqua;"><a href="">삭제하기</a></td>
+			<th><a href="update.st?student_no=<%=dto.getStudent_no()%>&user_id=<%=dto.getUser_id()%>">수정하기</a></th>
+			<td>
+<!-- 				<form action="detail.st" method="get"> -->
+<%-- 					<input type="hidden" id="student_no" name="student_no" value="<%=dto.getStudent_no()%>">  --%>
+<%-- 					<input type="hidden" id="user_id"  name="user_id" value="<%=dto.getUser_id()%>">  --%>
+<%-- 					<input type="reset" value="삭제하기" onclick="deleteInfo(<%=dto.getStudent_no()%>,"<%=dto.getUser_id()%>");"> --%>
+<!-- 				</form> -->
+				<a onclick="deleteInfo('<%=dto.getStudent_no()%>', '<%=dto.getUser_id()%>');">삭제하기</a>
+			</td>
+
 		</tr>
 		
 
 	</table>
+	<script type="text/javascript">
+		function deleteInfo(value1, value2) {
+			//document.getElementById("student_no")
+			//document.getElementById("user_id")
+			
+			if(confirm('정말 삭제하시겠습니까??')){
+				location.href = 'delete.st?student_no=' + value1 + '&user_id=' + value2;
+				//삭제를 하기위해서는 key값이 필요함 url에 찍히게 해보기
+// 				alert('예 삭제 시작' + 'document.getElementById("student_no").value + document.getElementById("user_id").value');
+				
+				
+			}else{
+				alert('아니오 누름');
+			}
+		}
+	
+	
+	</script>
+	
+	
+	
 	<%@ include file="/include/footer.jsp" %>
 </body>
 </html>

@@ -127,7 +127,7 @@ public class StudentDAO {
 	public StudentDTO getStudentInfo(String student_no, String user_id) {// 해당하는 메소드가 실행될때 필요한 변수를 어떤곳에 입력받아서 사용하기.
 		//데이터베이스에 접근해서 학생 한명의 정보를 얻어오는 비지니스로직을 구현(데이터 한건 얻어오기)
 //		StudentDTO dto = null; 전역변수로 빼줌
-		getConn();
+		conn = getConn();
 		sql = "SELECT u.*, s.student_name FROM USER_INFO u left outer join STUDENT s ON u.STUDENT_NO = s.STUDENT_NO WHERE u.student_no = ? AND u.user_id = ?";
 		try {
 			ps = conn.prepareStatement(sql);
@@ -162,12 +162,76 @@ public class StudentDAO {
 		
 	}
 
-	public StudentDTO getStudentUpdate(String student_no, String user_id) {
-		conn = getConn();
-		 
+	//업데이트
+	public int modifyInfo(StudentDTO dto) {
+		getConn();
+		sql = "UPDATE user_info SET first_name = ?, last_name = ? WHERE student_no = ? and user_id = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getFirst_name());
+			ps.setString(2, dto.getLast_name());
+			ps.setInt(3, dto.getStudent_no());
+			ps.setString(4, dto.getUser_id());
+			return ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}finally {
+			dbClose();
+		}
+	
 		
-		return null;
+		return 0;
+	}
+
+//	public StudentDTO getDeleteInfo(dto) {
+//		getConn();
+//		sql = "DELETE FROM user_info WHERE student_no = '?' and user_id = ?";
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			ps.setString(1,dto.getStudent_no());
+//			ps.setString(2, dto.getUser_id());
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		
+//		
+//		
+//		return null;
+//	}
+	
+	
+
+
+	public void deleteInfo(String student_no, String user_id) {
+		conn = getConn();
+		sql = "DELETE FROM user_info WHERE student_no = ? and user_id = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,student_no);
+			ps.setString(2, user_id);
+			
+			System.out.println(ps.executeUpdate());
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		
 	}
 	
+
+
+}//class
 	
-}
+	
+	
+	
+	
