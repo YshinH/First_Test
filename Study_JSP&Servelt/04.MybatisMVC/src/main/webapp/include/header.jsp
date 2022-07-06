@@ -34,12 +34,13 @@
             <ul id="gnb">
 
                 <li><a href="list.st">JDBC(학생목록조회)</a></li>
+                
+                <li><a href="list.cu">고객관리(Mybatis)</a></li>
 
                 <li><a href="list.hr">Mybatis(사원목록조회)</a></li>
 
-                <li><a href="#">JSTL사용</a></li>
-
-                <li><a href="#">고객관리</a></li>
+                <li><a href="list.js">JSTL사용</a></li>
+				<!-- list.jsp(jstl폴더 안에 있음)을 연결하세요. -->
 
                 <li><a href="#">게시판</a></li>
 
@@ -48,7 +49,8 @@
  
 
             <ul class="util">
-
+			
+		
                 <li><a href="#">로그인</a></li>
 
                 <li><a href="#">회원가입</a></li>

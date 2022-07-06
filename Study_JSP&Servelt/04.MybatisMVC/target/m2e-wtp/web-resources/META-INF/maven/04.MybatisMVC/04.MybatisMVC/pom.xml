@@ -26,6 +26,21 @@
 	    <artifactId>ojdbc11</artifactId>
 	    <version>21.1.0.0</version>
 	</dependency>
+	
+	<!-- JDBC이용 MyBatis 추가 2022.07.06 YSH이 추가함 -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.5.6</version>
+		</dependency>
+
+	<!-- jsp에서 편하게 표현하기 위해서 추가(EL) 2022.07.06YSH 추가 -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+
 
   </dependencies>
   </project>

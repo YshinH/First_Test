@@ -39,7 +39,7 @@ public class StudentController extends HttpServlet {
 			//보낼때는 attribute사용하여 object타입으로 보내기에
 			//받는쪽에서 빼서 캐스팅하여 사용하자
 			//JSP에 보내서 출력 해보기
-			rd = req.getRequestDispatcher("Student/list.jsp");
+			rd = req.getRequestDispatcher("student/list.jsp");
 			
 		}else if(req.getServletPath().equals("/test.st")) {
 			//디비연결 테스트했음
@@ -68,7 +68,7 @@ public class StudentController extends HttpServlet {
 			//detail.jsp <= 상세정보를 확인할수 있는 페이지 (헤더, 푸터) 그대로 있고 내용만 바뀌게
 			req.setAttribute("dto", dto);
 			
-			rd = req.getRequestDispatcher("Student/detail.jsp");
+			rd = req.getRequestDispatcher("student/detail.jsp");
 			System.out.println(rd);
 			//ArrayList, ????
 			//DAO메소드 만들어보기. getStudentInfo메소드 만들기(리턴타입 등등 자유롭게)
@@ -81,7 +81,7 @@ public class StudentController extends HttpServlet {
 			//select * from table 'where' student_no, user_id
 
 			req.setAttribute("dto", dto);
-			rd = req.getRequestDispatcher("Student/update.jsp");
+			rd = req.getRequestDispatcher("student/update.jsp");
 				
 		}else if(req.getServletPath().equals("/modify.st")) {
 			//student_name, user_id, user_pw, first_name, last_name,
@@ -109,8 +109,9 @@ public class StudentController extends HttpServlet {
 			resp.sendRedirect("list.st");
 			//rd = req.getRequestDispatcher("student/list.jsp");// <= 페이지를 바로 요청을 해버리면 list가없기떄문에 에러발생
 			return;
-		 
-	
+			
+			
+			
 			
 		}
 		
