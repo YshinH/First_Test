@@ -1,9 +1,9 @@
 package customer;
 
 public class CustomerDTO {
-	
 	private int id;
-	private	String name, gender, email, phone;
+	private String  name, gender, email, phone;
+	
 	
 	
 	public int getId() {
@@ -37,5 +37,5 @@ public class CustomerDTO {
 		this.phone = phone;
 	}
 	
-	
+
 }
