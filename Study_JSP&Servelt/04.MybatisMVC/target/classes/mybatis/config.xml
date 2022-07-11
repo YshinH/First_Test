@@ -7,15 +7,15 @@
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
-        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/> <!-- 변경  -->
-        <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/> <!-- 변경  -->
-        <property name="username" value="hanul"/> <!-- 변경  -->
-        <property name="password" value="0000"/> <!-- 변경  -->
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/><!-- 변경 -->
+        <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/><!-- 변경 -->
+        <property name="username" value="hanul"/><!-- 변경 -->
+        <property name="password" value="0000"/><!-- 변경 -->
       </dataSource>
     </environment>
   </environments>
-  <mappers>  <!-- 맵퍼가 추가 될때마다 하나씩 추가해줘야함 Spring Mybatis에서는 *-mapper.xml로 여러 맵퍼를 한번에 인식가능 -->
-    <mapper resource="customer/test-mapper.xml"/>
+  <mappers><!-- 맵퍼가 추가 될때마다 하나씩 추가해줘야함 Spring Mybatis에서는 *-mapper.xml.로 여러 맵퍼를 한번에 인식가능 -->
+    <mapper resource="customer/test-mapper.xml"/><!--  -->
     <mapper resource="customer/cus-mapper.xml"/>
   </mappers>
 </configuration>

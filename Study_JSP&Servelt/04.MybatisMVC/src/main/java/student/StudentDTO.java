@@ -1,13 +1,15 @@
 package student;
 
 public class StudentDTO {
-	private String student_name,  user_id, user_pw, first_name, last_name, create_ymd, update_ymd, admin_yn;
+	private String student_name, user_id, user_pw, first_name, last_name, create_ymd, update_ymd, admin_yn;
 	private int student_no, money;
+	
 	
 	
 	
 	public StudentDTO(String student_name, String user_id, String user_pw, String first_name, String last_name,
 			int student_no) {
+		super();
 		this.student_name = student_name;
 		this.user_id = user_id;
 		this.user_pw = user_pw;
@@ -15,6 +17,8 @@ public class StudentDTO {
 		this.last_name = last_name;
 		this.student_no = student_no;
 	}
+	
+	
 	public String getStudent_name() {
 		return student_name;
 	}
@@ -77,5 +81,5 @@ public class StudentDTO {
 	}
 	
 	
-
+	
 }
