@@ -25,10 +25,10 @@ public class CusController extends HttpServlet {
 	// 6. ↑ 조회 된 데이터를 jstl이용해서 화면에 보여주기 
 	
 	RequestDispatcher rd;
-	CustomerDAO dao = new CustomerDAO();
-	CustomerDTO dto = new CustomerDTO();
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		CustomerDAO dao = new CustomerDAO();
+		CustomerDTO dto = new CustomerDTO();
 		
 		if(req.getServletPath().equals("/list.cu")) {
 			//System.out.println("고객관리");
@@ -46,8 +46,12 @@ public class CusController extends HttpServlet {
 			
 			return;
 			
+		}else if(req.getServletPath().equals("/update.cu")) {
+			dao.update(req.getParameter("id"));
+			System.out.println(req.getParameter("id"));
+			System.out.println(req.getContextPath());
+			rd = req.getRequestDispatcher("customer/update.jsp");
 		}
-		
 		rd.forward(req, resp);
 	}
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+`<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
                                     <tbody>
 										<c:forEach items="${list}" var="dto">
                                         <tr>
-											<th>${dto.id}</th>
+											<th><a href="update.cu?id=${dto.id}">${dto.id}</a></th>
 											<th>${dto.name}</th>
 											<th>${dto.gender}</th>
 											<th>${dto.email}</th>

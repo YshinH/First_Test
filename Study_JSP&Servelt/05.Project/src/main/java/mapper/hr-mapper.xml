@@ -8,7 +8,7 @@
   </select>
   
   <select id="deptlist" resultType="hr.DeptDTO">
-   select * from departments order by department_id DESC
+   select * from departments order by department_id 
   </select>
   
 

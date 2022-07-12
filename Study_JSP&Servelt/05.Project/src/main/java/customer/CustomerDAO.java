@@ -35,4 +35,9 @@ public class CustomerDAO extends CommonDAO{
 	return sql.delete("cus.delete", id);
 	
 	}
+
+	public void update(String parameter) {
+		// TODO Auto-generated method stub
+		
+	}
 }

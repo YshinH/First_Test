@@ -11,8 +11,9 @@
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css?<%=new java.util.Date() %>" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    	<script <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -37,9 +38,9 @@
                         <!-- 세션에 로그인정보를 저장하고 세견에 로그인정보가 있는지
                         없는지에 따라서 로그아웃, 내정보 보기 또는 로그인을 보여준다. -->
                         <c:if test="${empty userInfo }">
-                        <li><a class="dropdown-item" href="login">로그인</a></li>
+                        <li><a class="dropdown-item" href="login.mb">로그인</a></li>
                         	<li><hr clclass="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="jogin">회원가입</a></li>  
+                        <li><a class="dropdown-item" href="join.mb">회원가입</a></li>  
                         </c:if>
                         <c:if test="${! empty userInfo }">
                         <li><a class="dropdown-item" href="logout">로그아웃</a></li>
@@ -89,7 +90,7 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="list.no">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 공지사항
                             </a>
