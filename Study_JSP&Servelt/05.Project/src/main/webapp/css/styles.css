@@ -11764,12 +11764,23 @@ input{
 input[name=address] {
 	width: 100% }
 
+select {
+	height: 32px;
+	cursor: pointer;
+	padding-left: 10px;
+}
 
+.font-b{ font-size: 20px; color: #5632a8;}
+.font-r{ font-size: 20px; color: #de262c;}
 
+.valid{ font-size:14px; color: #23d956; font-weight: bold;}
+.invalid{ font-size:14px; color: #de262c; font-weight: bold;}
 
+input[type=radio]{
+	width: 18px;
+	vertical-align: middle;	
 
-
-
+}
 
 
 
