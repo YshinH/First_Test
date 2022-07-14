@@ -11750,6 +11750,9 @@ a.btn-fill{
 	
 }
 
+.btnSet {margin: 20px auto; 
+		 margin-left: 150px;}
+
 table tr th:first-child{ 
 	border-right: 2px solid #333 }
 table tr td{ padding: 6px 10px}
@@ -11779,7 +11782,6 @@ select {
 input[type=radio]{
 	width: 18px;
 	vertical-align: middle;	
-
 }
 
 

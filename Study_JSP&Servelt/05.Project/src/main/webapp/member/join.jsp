@@ -21,7 +21,8 @@
 <h3 class="mt-4">회원가입</h3>
 
 <p>* 는 필수입력 항목입니다.</p>
-<form>
+
+<form  method="post" action="member_join.mb">
 <table class='w-px600'>
 <tr><th class='w-px140'>* 성명</th>
 	<td><input type="text" name="name"></td>
@@ -74,11 +75,68 @@
 </table>
 
 </form>
+<div class="btnSet">
+	<a class="btn-fill" onclick="fn_join()">회원가입</a>
+	<a class="btn-empty" href="javascript:history.go(-1)">취소</a>	<!-- href는 자바스크립트라고 인식시켜줘야함 -->
+<!-- 	<a class="btn-empty" onclick="history.go(-1)">취소</a> --><!-- 위와 동일한 방법 -->
+</div>
+
+
 </div>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src='js/join_check.js'></script>
+<script src='js/join_check.js?<%=new java.util.Date()%>'></script><!-- 시간데이터로 페이지에 정보를 계속 받아둠 -->
 <script>
+
+//회원가입버튼 눌렀을때
+function fn_join(){
+ 	//필수입력항목에 입력되어있는지 확인
+ 	//특정항목에 대해서는 유효한 입력인지도 확인
+ 	if( $('[name=name]').val()== '' ){
+ 		alert('성명을 입력하세요');
+ 		$('[name=name]').focus();
+ 		return;	
+ 	}
+	
+ 	//아이디는 중복확인여부에 따라 처리
+ 	//중복확인 한 경우: 
+ 	//invalid 이면 회원가입불가
+ 	if( $('[name=userid]').hasClass('checked')){
+	 	if( $('[name=userid]').siblings('div').hasClass('invalid') ){
+	 		alert('회원가입 불가!\n' + join.id.unUsable.desc);
+	 		$('[name=userid]').focus();
+	 		return;
+	 		}
+	}else{
+ 	//중복확인 하지 않은 경우
+		if( ! item_check( $('[name=userid]'))) return;
+		else{
+			alert('회원가입 불가!\n' + join.id.valid.desc);
+			$('[name=userid]').focus();
+	 		return;
+		}
+	}
+ 	
+ 	if( ! item_check( $('[name=userpw]'))) return;
+ 	if( ! item_check( $('[name=userpw_ck]'))) return;
+ 	if( ! item_check( $('[name=email]'))) return;
+ 	
+ 	$('form').submit();
+	
+}
+
+function item_check( tag ){
+	var status = join.tag_status( tag );
+	if( status.code=='invalid'){
+		alert('회원가입 불가!\n' + status.desc);
+		tag.focus();
+		return false;
+		
+	}else
+		return true;
+
+}
+
 
 //아이디중복체크
 $('#id_check').on('click', function () {
@@ -99,8 +157,11 @@ function id_check() {
 	$.ajax({
 		url: 'id_check.mb',
 		data: { id: $userid.val() },
-		success: function() {
-			
+		success: function( response ) {
+			$userid.addClass('checked');
+			response = join.id_usable( response );
+			$userid.siblings('div').text( response.desc )
+								   .removeClass().addClass( response.code );
 		}, error: function(req, text) {
 			alert(text +':' +req.status);
 		}
@@ -111,7 +172,12 @@ function id_check() {
 }
 
 //입력의 유효성을 판단
-$('.chk').on('keyup', function () {
+$('.chk').on('keyup', function(e) {		//발생할 이벤트를 파라미터로 받아옴e
+	if( $(this).attr('name')=='userid'){
+		if( e.keyCode==13 ) { id_check(); return; }
+		else $(this).removeClass('checked');
+		
+	}
 	var status = join.tag_status( $(this) );
 	$(this).siblings('div').text( status.desc ).removeClass().addClass( status.code );
 });
@@ -119,8 +185,8 @@ $('.chk').on('keyup', function () {
 
 //만13세까지만 가입가능
 var today = new Date();
-var start = today.getFullYear()-100; //오늘을 기준으로 만13세이상부터 100살까지
-today.setFullYear( today.getFullYear() - 13 );
+var start = today.getFullYear()-100; //오늘을 기준으로 100살까지
+today.setFullYear( today.getFullYear() - 13 );//오늘을 기준으로 만13세이상부터 100살까지셋팅
 today.setDate( today.getDate()-1 );
 var defaultDay = new Date(); 
 defaultDay.setFullYear(1990); //1990.07-13이 있는 기본달력이 보일수있게
@@ -176,6 +242,9 @@ $('#post').on('click',function(){
 
 	        }
 	    }).open();
+	 
+	 
+
 });
 
 

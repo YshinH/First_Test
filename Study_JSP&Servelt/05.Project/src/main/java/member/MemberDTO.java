@@ -2,7 +2,7 @@ package member;
 
 public class MemberDTO {
 	private String userid, name, userpw, gender, email
-				   , birth, phone, address, admin;
+				   , birth, phone, post, address, admin;
 
 	public String getUserid() {
 		return userid;
@@ -60,6 +60,14 @@ public class MemberDTO {
 		this.phone = phone;
 	}
 
+	public String getPost() {
+		return post;
+	}
+	
+	public void setPost(String post) {
+		this.post = post;
+	}
+	
 	public String getAddress() {
 		return address;
 	}
@@ -75,6 +83,8 @@ public class MemberDTO {
 	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
+
+	
 	
 	
 }	

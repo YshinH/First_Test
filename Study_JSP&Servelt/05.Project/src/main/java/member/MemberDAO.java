@@ -15,7 +15,7 @@ public class MemberDAO {
 		try {
 			SqlSessionFactory factory
 			= new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(resource));
-			sql = factory.openSession();
+			sql = factory.openSession(true);		//autocommit 설정: true
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -26,7 +26,7 @@ public class MemberDAO {
 	//회원가입
 	public int member_join(MemberDTO dto) {
 		
-		return 0;
+		return sql.insert("member.join", dto);
 	}
 	
 	//내정보보기
@@ -38,7 +38,7 @@ public class MemberDAO {
 	//아이디 중복확인 count로 숫자로 돌려주기
 	public int member_id_check(String userid) {
 		
-		return 0;	
+		return sql.selectOne("member.id_check", userid);	
 	}
 	
 	//내정보변경
