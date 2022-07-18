@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,29 +8,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="/include/layout.jsp" %>
+<%@ include file="/include/layout.jsp"%>
 <div class="container-fluid px-4">
-<h3 class="mt-4";">공지글목록</h3>
-		
-	<div class='list-top'>
-		<ul>
-<!-- 			관리자회원으로 로그인한 경우만 글쓰기 가능 -->
-			<li><a class="btn-fill" href='new.no'>글쓰기</a></li>
-<!-- 			<li><a class="btn-empty">글쓰기</a></li> -->
-		</ul>
-	</div>
-	<table class="table table-hover">
-		<tr>
-			<th>제목</th>
-			<th class='w-px120'>작성자</th>
-			<th class='w-px120'>작성일자</th>
+<h3 class="mt-4">공지글목록</h3>
 
-		</tr>		
-	</table>
-		
-		
-		
+<div class='list-top'>
+	<ul>
+		<!-- 관리자회원으로 로그인한 경우만 글쓰기 가능 -->
+		<c:if test="${userInfo.admin eq 'Y' }">
+		<li><a class='btn-fill' href='new.no'>글쓰기</a></li>
+		</c:if>
+	
+	</ul>
 </div>
-<%@ include file="/include/footer.jsp" %>
+
+<table class="table table-hover">
+	<tr><th>제목</th>
+		<th class='w-px120'>작성자</th>
+		<th class='w-px120'>작성일자</th>
+	</tr>	
+</table>
+
+
+
+
+
+</div>
+<%@ include file="/include/footer.jsp"%>
+
 </body>
 </html>

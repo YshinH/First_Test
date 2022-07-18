@@ -4,13 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hr">
   <select id="emplist" resultType="hr.EmpDTO">
-   select employee_id eid, FIRST_NAME || ' ' || LAST_NAME name, email email, phone_number phone, hire_date hdate, job_id jid, salary sal, department_id did from employees order by eid DESC
+    SELECT * FROM EMPLOYEES ORDER BY EMPLOYEE_ID ASC
   </select>
-  
   <select id="deptlist" resultType="hr.DeptDTO">
-   select * from departments order by department_id 
+    SELECT * FROM DEPARTMENTS ORDER BY DEPARTMENT_ID ASC
   </select>
-  
-
 
 </mapper>

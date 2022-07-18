@@ -1,10 +1,8 @@
 package customer;
 
 public class CustomerDTO {
-
 	private int id;
 	private String name, gender, email, phone;
-	
 	public int getId() {
 		return id;
 	}
@@ -35,7 +33,5 @@ public class CustomerDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	
 	
 }

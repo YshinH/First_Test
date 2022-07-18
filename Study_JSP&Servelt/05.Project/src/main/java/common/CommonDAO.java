@@ -9,16 +9,14 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class CommonDAO {
-
 	public static SqlSession sql;
 	static {
-
+		String resource = "mybatis/config.xml";
+		InputStream inputStream;
 		try {
-			String resource = "mybatis/config.xml";
-			InputStream inputStream = Resources.getResourceAsStream(resource);
+			inputStream = Resources.getResourceAsStream(resource);
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			sql = sqlSessionFactory.openSession(true);	//AutoCommit설정을 true
-			
+			sql = sqlSessionFactory.openSession(true); //AutoCommit설정을 true
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,6 +28,4 @@ public class CommonDAO {
 	}
 	
 	
-	
-	
-}//class
+}

@@ -4,11 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cus">
   <select id="list" resultType="customer.CustomerDTO">
-   select * from customer order by id DESC
+     select * from customer order by id desc
   </select>
-  
   <delete id="delete">
-  	DELETE FROM customer WHERE id = #{id}
+  	 DELETE FROM CUSTOMER WHERE ID=#{id}
   </delete>
-
 </mapper>

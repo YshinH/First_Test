@@ -1,7 +1,6 @@
 package hr;
 
 public class DeptDTO {
-
 	private String department_id, department_name, manager_id, location_id;
 
 	public String getDepartment_id() {
@@ -35,6 +34,5 @@ public class DeptDTO {
 	public void setLocation_id(String location_id) {
 		this.location_id = location_id;
 	}
-	
 	
 }

@@ -4,11 +4,39 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
+<!-- 비밀번호를 암호화해서 변경저장하기 -->
+<update id="pw_encrypt" >
+update member set salt_pw=#{salt_pw}, salt=#{salt} where userid=#{userid}
+
+</update>
+
+
+<!-- 전체회원목록조회 -->
+<select id="list" resultType="member.MemberDTO">
+select * from member
+</select>
+
+
+<!-- 회원아이디에 해당하는 salt조회 -->
+<select id="salt" resultType="String">
+select salt from member where userid=#{id}
+
+
+</select>
+
+<!-- 로그인처리 -->
+<select id='login' resultType="member.MemberDTO">
+
+select * from member where userid=#{id} and salt_pw=#{pw}
+<!-- select * from member where userid=#{id} and userpw=#{pw} -->
+</select>
+
 <!-- 회원가입처리 -->
 <insert id='join'>
-insert into member(userid, userpw, name, gender, email, post, address, phone, birth)
+insert into member
+(userid, userpw, name, gender, email, post, address, phone, birth, salt, salt_pw)
 values (#{userid}, #{userpw}, #{name}, #{gender}, #{email}
-		, #{post}, #{address}, #{phone}, #{birth})
+		, #{post}, #{address}, #{phone}, #{birth}, #{salt}, #{salt_pw})
 </insert>
 
 <!-- 아이디 중복확인 -->
@@ -17,5 +45,3 @@ select count(*) from member where userid = #{userid}
 </select>
 
 </mapper>  
-
-

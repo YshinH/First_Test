@@ -9,18 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.CommonDAO;
 
-
+/**
+ * Servlet implementation class TestController
+ */
 @WebServlet("*.te")
 public class TestController extends HttpServlet {
-
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//req.getSession().setAttribute("userInfo", "a"); 로그아웃
-		
-		
+
 		CommonDAO dao = new CommonDAO();
 		dao.test();
-		
 	}
-
+	
 }

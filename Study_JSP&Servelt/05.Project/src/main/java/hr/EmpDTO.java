@@ -1,23 +1,31 @@
 package hr;
 
-public class EmpDTO {	//DTO => VO(Value Object)
-	
-	private String eid, name, email, phone, hdate, jid, sal, did;
+public class EmpDTO { // DTO => VO(Value Object)
+	private String employee_id, first_name, last_name, email, phone_number, hire_date;
+//employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id
 
-	public String getEid() {
-		return eid;
+	public String getEmployee_id() {
+		return employee_id;
 	}
 
-	public void setEid(String eid) {
-		this.eid = eid;
+	public void setEmployee_id(String employee_id) {
+		this.employee_id = employee_id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getEmail() {
@@ -28,48 +36,20 @@ public class EmpDTO {	//DTO => VO(Value Object)
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPhone_number() {
+		return phone_number;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 
-	public String getHdate() {
-		return hdate;
+	public String getHire_date() {
+		return hire_date;
 	}
 
-	public void setHdate(String hdate) {
-		this.hdate = hdate;
+	public void setHire_date(String hire_date) {
+		this.hire_date = hire_date;
 	}
-
-	public String getJid() {
-		return jid;
-	}
-
-	public void setJid(String jid) {
-		this.jid = jid;
-	}
-
-	public String getSal() {
-		return sal;
-	}
-
-	public void setSal(String sal) {
-		this.sal = sal;
-	}
-
-	public String getDid() {
-		return did;
-	}
-
-	public void setDid(String did) {
-		this.did = did;
-	}
-
-	
-
-
 
 }
