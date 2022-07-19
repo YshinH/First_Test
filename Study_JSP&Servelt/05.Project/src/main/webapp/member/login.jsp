@@ -9,6 +9,7 @@
 <link href='css/member.css' rel='stylesheet'>
 <style>
 .naver{ background: url("images/naver.png") center; background-size: 100%;}
+.kakao{ background: url("images/kakao.png") center; background-size: 100%;}
 
 
 </style>
@@ -31,8 +32,8 @@
 
 </div>
 <script>
-$('#userpw').keypress(function(e){
-	if( e.keyCode==13 ) login();
+$('#userpw').keypress(function(e){	//enter니까 키프레스
+	if( e.keyCode==13 ) login();	//13번 enter인경우 로그인처리
 });
 function login(){
 	if( ! emptyCheck() ) return;
@@ -41,8 +42,8 @@ function login(){
 		url: 'iotlogin.mb',
 		data: { id:$('#userid').val(), pw:$('#userpw').val() },
 		success: function( response ){
-			if( JSON.parse(response) ){
-				location = '<c:url value="/"/>';
+			if( JSON.parse(response) ){//json타입으로 변환시키니까 boolean타입으로 들어옴
+				location = '<c:url value="/"/>';	//웰컴페이지인 루트로 가기위한 슬러시처리
 			}else{
 				alert('아이디나 비밀번호가 일치하지 않습니다!');
 				$('#userid').focus();

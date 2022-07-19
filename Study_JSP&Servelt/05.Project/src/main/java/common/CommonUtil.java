@@ -18,7 +18,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 public class CommonUtil {
 	
-	//Http 요청결과를 받는 처리(NAVER, KAKAO) 2개의 파라미터값을 받음 
+	//Http 요청결과를 받는 처리(NAVER, KAKAO) 2개의 파라미터값을 받음 //메소드 오버로딩
 	public String requestAPI( String apiURL, String property ) {
 		String result = "";
 		
@@ -53,7 +53,7 @@ public class CommonUtil {
 	
 	
 	
-	//Http 요청결과를 받는 처리(NAVER, KAKAO) 1개의 파라미터를 받음
+	//Http 요청결과를 받는 처리(NAVER, KAKAO) 1개의 파라미터(문자열)를 받음
 	public String requestAPI( String apiURL ) {
 		String result = "";
 		
@@ -63,9 +63,9 @@ public class CommonUtil {
 	        con.setRequestMethod("GET");
 	        int responseCode = con.getResponseCode();
 	        BufferedReader br;
-	        System.out.print("responseCode="+responseCode); //200번코드가 정상적으로 호출됬는지 확인용 코드를 넣었음
+	        System.out.print("responseCode="+responseCode); //200번코드가 정상적으로 호출됬는지 확인용 코드를 넣었음// 넣어도 되고 안넣어도됨
 	        if(responseCode==200) { // 정상 호출
-	          br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+	          br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));//스트링 정보를 읽어올때 utf-8로 읽어와야함 안그럼 깨짐
 	        } else {  // 에러 발생
 	          br = new BufferedReader(new InputStreamReader(con.getErrorStream(), "utf-8"));
 	        }
@@ -75,7 +75,7 @@ public class CommonUtil {
 	          res.append(inputLine);
 	        }
 	        br.close();
-	        if(responseCode==200) {
+	        if(responseCode==200) {//out객체로 출력하는게 아니라 데이터를 컨트롤러로 리턴하기위해 변수에 담음
 	        	result = res.toString();
 	        }
 	      } catch (Exception e) {
@@ -94,21 +94,21 @@ public class CommonUtil {
 		random.nextBytes(salt);
 		
 		//각 byte 를 16진수로 변환
-		StringBuffer buf = new StringBuffer();
+		StringBuffer buf = new StringBuffer();	//문자 각각을 하나로 묶기위한 문자열 사용
 		for( byte b : salt ) {
-			buf.append( String.format("%02x", b) );
+			buf.append( String.format("%02x", b) );	//16진수형태로 변환
 		}
 		return	buf.toString();
 	}
 	
-	//솔트를 사용해 문자를 암호화하기
+	//솔트를 사용해 문자를 암호화하기			
 	public String getEncrypt(String pw, String salt) {
 		String salt_pw = pw + salt;
 		
 		//암호화해쉬함수를 사용해 암호화 방식 지정
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			md.update( salt_pw.getBytes() );
+			md.update( salt_pw.getBytes() );	//각각의 바이트타입을 암호화시킴
 			byte[] digest = md.digest();
 			
 			//16진수로 변환
@@ -270,11 +270,11 @@ public class CommonUtil {
 		
 		mail.setHostName("smtp.naver.com"); //이메일서버지정
 		//아이디, 비번 입력해서 로그인하기: abc, 123
-		mail.setAuthentication("관리자의 이메일 아이디", "해당 아이디의 비밀번호");
+		mail.setAuthentication("tlsgid666@naver.com", "!hyang259312!");
 		mail.setSSLOnConnect(true);  //로그인하기
 		
-		try {
-			mail.setFrom("관리자 이메일 주소", "오픈소스 관리자");//메일 보내는 사람 지정: abc@naver.com
+		try {	//누가 받는지 오류가 발생할 수 있기 때문에 try,catch
+			mail.setFrom("tlsgid666@naver.com", "오픈소스 관리자");//메일 보내는 사람 지정: abc@naver.com
 			mail.addTo(email, name); //메일 받는 사람 지정
 			//mail.addTo("hong@", "홍길동"); //메일 받는 사람 지정
 			//mail.addTo("sim@", "심청"); //메일 받는 사람 지정
@@ -289,3 +289,16 @@ public class CommonUtil {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

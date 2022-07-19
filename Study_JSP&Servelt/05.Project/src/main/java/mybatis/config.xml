@@ -18,6 +18,8 @@
     <mapper resource="mapper/test-mapper.xml"/>
     <mapper resource="mapper/cus-mapper.xml"/>
     <mapper resource="mapper/member-mapper.xml"/>
+    <mapper resource="mapper/notice-mapper.xml"/>
+    
 <!--     <mapper resource="mapper/*-mapper.xml"/> -->
     <!-- 추후 mapper/*-mapper.xml (전체인식함)  -->
   </mappers>

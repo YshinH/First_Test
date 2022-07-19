@@ -21,7 +21,6 @@ select * from member
 <select id="salt" resultType="String">
 select salt from member where userid=#{id}
 
-
 </select>
 
 <!-- 로그인처리 -->
@@ -34,9 +33,12 @@ select * from member where userid=#{id} and salt_pw=#{pw}
 <!-- 회원가입처리 -->
 <insert id='join'>
 insert into member
-(userid, userpw, name, gender, email, post, address, phone, birth, salt, salt_pw)
-values (#{userid}, #{userpw}, #{name}, #{gender}, #{email}
-		, #{post}, #{address}, #{phone}, #{birth}, #{salt}, #{salt_pw})
+(userid, userpw, name, gender, email, post, address, phone, birth, salt, salt_pw, social)
+values (#{userid}, #{userpw, jdbcType=VARCHAR}, #{name}, #{gender}, #{email}
+		, #{post, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}
+		, #{phone, jdbcType=VARCHAR}, #{birth, jdbcType=VARCHAR}
+		, #{salt, jdbcType=VARCHAR}, #{salt_pw, jdbcType=VARCHAR}
+		, #{social, jdbcType=VARCHAR})
 </insert>
 
 <!-- 아이디 중복확인 -->

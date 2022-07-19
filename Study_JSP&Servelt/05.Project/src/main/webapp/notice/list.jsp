@@ -27,6 +27,13 @@
 		<th class='w-px120'>작성자</th>
 		<th class='w-px120'>작성일자</th>
 	</tr>	
+	<c:forEach items="${list}" var="dto">
+	<tr><td>${dto.title}</td>
+		<td>${dto.name}</td>
+<%-- 		<td>${dto.writer}</td> --%>
+		<td>${dto.writedate}</td>	
+	</tr>
+	</c:forEach>
 </table>
 
 
