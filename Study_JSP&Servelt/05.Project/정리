@@ -12,3 +12,15 @@
  
  <카카오 지능형IoT>
  RestAPI :66777d03a88198e787d26bf43fd7ed82
+ 
+ <기본화면 정렬>
+ <%@ include file="/include/layout.jsp"%>
+<div class="container-fluid px-4">
+<h3 class="mt-4">상세화면</h3>
+
+</div>
+<%@ include file="/include/footer.jsp"%>
+ 
+ 
+ 
+ 

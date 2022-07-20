@@ -3,11 +3,30 @@ package notice;
 import java.sql.Date;
 
 public class NoticeDTO {
-	private int id, readcnt;
-	private String title, content, writer, name;
+	private int id, readcnt, no;
+	private String title, content, writer, name, filename, filepath;
 	private Date writedate;
 	
 	
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getFilepath() {
+		return filepath;
+	}
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public int getId() {
 		return id;
 	}

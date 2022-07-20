@@ -8,11 +8,30 @@
 // 
 //$(function(){
 	
+	$('#attach-file').on('change', function(){
+		//console.log(this.files[0]);
+		var attached = this.files[0];
+		if(attached){
+			$('#delete-file').css('display', 'inline');
+		}else{
+			$('#delete-file').css('display', 'none');
+			
+		}
+		
+	});
+	
+	//첨부파일 삭제 클릭시
+	$('#delete-file').on('click', function(){
+		$('#attach-file').val('');
+		$('#delete-file').css('display', 'none');
+		
+	});
+	
 	function emptyCheck(){
 		var ok = true;
 		$('.chk').each(function(){
 			if( $(this).val()=='' ){
-				alert('입력하세요');
+				alert($(this).attr('title')+ ' 입력하세요');
 				$(this).focus();
 				ok = false;
 				return ok;

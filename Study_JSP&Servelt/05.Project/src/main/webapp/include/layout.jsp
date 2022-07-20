@@ -30,6 +30,7 @@
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            	<li style="color: #fff">${userInfo.name}</li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -39,11 +40,13 @@
                         	 없는지에 따라서 로그아웃,내정보 보기 또는 로그인을 보여준다.
                           -->
                         <c:if test="${empty userInfo}">
+                        	
                          <li><a class="dropdown-item" href="login.mb">로그인</a></li>
                              <li><hr class="dropdown-divider" /></li>
                          <li><a class="dropdown-item" href="join.mb">회원가입</a></li>
                         </c:if>
                         <c:if test="${!empty userInfo}">
+                        	
                         <li><a class="dropdown-item" href="logout.mb">로그아웃</a></li>
                             <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="info">내정보</a></li>

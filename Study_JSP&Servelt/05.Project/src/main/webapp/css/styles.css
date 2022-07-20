@@ -2201,6 +2201,7 @@ progress {
           appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	height: 38px;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control, .dataTable-input {
@@ -11759,10 +11760,21 @@ table tr { border-bottom: 1px solid #ccc }
 
 label:not(:last-child) { margin-right: 20px }
 
+textarea{
+	resize: none;
+	padding: 10px;
+	
+}
+
 input {
 	height: 30px;
 	padding: 0 10px;
 }
+
+input[name=title], textarea[name=content]{
+	width: calc(100% - 24px)
+}
+
 input[name=address] { 
 	width: 100% }
 
@@ -11782,7 +11794,7 @@ input[type=radio] {
 	vertical-align: middle;
 }
 
-
+#delete-file{ display: none; }
 
 
 

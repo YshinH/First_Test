@@ -23,14 +23,16 @@
 </div>
 
 <table class="table table-hover">
-	<tr><th>제목</th>
+
+	<tr><th class='w-px80'>번호</th>
+		<th>제목</th>
 		<th class='w-px120'>작성자</th>
 		<th class='w-px120'>작성일자</th>
 	</tr>	
 	<c:forEach items="${list}" var="dto">
-	<tr><td>${dto.title}</td>
+	<tr><td>${dto.no}</td>
+		<td><a href="detail.no?id=${dto.id}">${dto.title}</a></td>
 		<td>${dto.name}</td>
-<%-- 		<td>${dto.writer}</td> --%>
 		<td>${dto.writedate}</td>	
 	</tr>
 	</c:forEach>
