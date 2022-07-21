@@ -38,7 +38,7 @@ public class NoticeDAO {
 	
 	//공지글 변경저장
 	public void notice_update(NoticeDTO dto) {
-	
+		sql.update("notice.update", dto);
 		
 	}
 	

@@ -3,11 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="notice">
+  
+  <!-- 공지글 변경저장처리 -->
+  	<update id="update">
+  	update notice set title = #{title}, content = #{content}, filename = #{filename, jdbcType=VARCHAR}, filepath = #{filepath, jdbcType=VARCHAR}
+  	where id = #{id}
+
+  	</update>
+  	
+  	
   	
   	<!-- 공지글 신규저장처리 -->
   	<insert id="insert">
-  	insert into notice(title, content, writer)
-  	values(#{title}, #{content}, #{writer})
+  	insert into notice(title, content, writer, filename, filepath)
+  	values(#{title}, #{content}, #{writer}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
   	
   	</insert>
   	

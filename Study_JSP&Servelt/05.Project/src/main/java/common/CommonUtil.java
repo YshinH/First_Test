@@ -1,11 +1,14 @@
 package common;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -17,15 +20,49 @@ import java.util.UUID;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.apache.catalina.connector.Response;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 
 public class CommonUtil {
+	
+	//파일다운로드 처리
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response, String filename, String filepath) {
+		//다운로드할 파일찾기
+		filepath = request.getServletContext().getRealPath("/" + filepath);
+		File file = new File(filepath);
+		//첨부된 파일의 마임타입을 지정한다	//서버의 MIMEtype에서 찾기
+		String mime = request.getServletContext().getMimeType(filename);
+		response.setContentType(mime);
+		//첨부파일 다운로드임을 응답객체의 header에 지정한다.
+		try {
+			filename = URLEncoder.encode(filename, "utf-8");
+			response.setHeader("content-disposition", "attachment; filename=" + filename);
+		
+			//Reader/Writer 문자   InputStream/OutputStream 바이너리 파일
+			 ServletOutputStream out = response.getOutputStream();
+			 BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
+			 byte buff[] = new byte[1024];	//1024  -> 962  1986
+			 int read = 0;
+			 while( (read = in.read(buff)) != -1 ) {
+				 out.write(buff, 0, read);
+			 }
+			 //첫번째방법 : 플러쉬 처리를 해줘야지 남은것도 다 가져와서 다운받을수 있음
+			 //두번째 방법 : 버퍼드아웃풋스트림을 닫아줘야지 다운받을수 있음
+			 in.close();
+			 
+			
+		}catch (Exception e) {
+		}
+		
+	}
 	
 	
 	//파일업로드처리

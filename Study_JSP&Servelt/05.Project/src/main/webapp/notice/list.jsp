@@ -28,12 +28,14 @@
 		<th>제목</th>
 		<th class='w-px120'>작성자</th>
 		<th class='w-px120'>작성일자</th>
+		<th class='w-px120'>첨부파일</th>
 	</tr>	
 	<c:forEach items="${list}" var="dto">
 	<tr><td>${dto.no}</td>
 		<td><a href="detail.no?id=${dto.id}">${dto.title}</a></td>
 		<td>${dto.name}</td>
 		<td>${dto.writedate}</td>	
+		<td>${empty dto.filename ? '' : '<i class="fa-solid fa-paperclip"></i>'}</td>	
 	</tr>
 	</c:forEach>
 </table>
