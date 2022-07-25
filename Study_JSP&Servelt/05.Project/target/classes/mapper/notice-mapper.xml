@@ -4,14 +4,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="notice">
   
+  <!-- 공지글 삭제 -->
+  <delete id="delete">
+  DELETE FROM notice WHERE id = #{id}
+  
+  
+  </delete>
+  
+  <!-- 공지글 답글저장처리 <![CDATA[중간에 등호가 들어가면 오류가 발생하기에 왠만하면 전체문장을 감싸자]]>-->
+  <insert id="reply_insert">
+  <![CDATA[ 
+  {
+  call declare 
+  begin
+	  update notice set step = step+1
+	  where root = #{root} and step > #{step};
+	  
+	  insert into notice(title, content, writer, filename, filepath, root, step, indent)
+	  values(#{title}, #{content} ,#{writer}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{root}, #{step}+1, #{indent}+1);
+  end
+  }
+  ]]>
+  
+  <!-- 
+  답글저장시
+  원글과 root가 같고, 원글의 step보다 더 큰 step을 가진 글에 대해
+  step+1 -> step 
+  
+  답글의 root: 원글의 root
+  답글의 step: 원글의 step+1
+  답글의 indent: 원글의 indent+1 -->
+  
+  </insert>
+  
+  
+  
   <!-- 공지글 변경저장처리 -->
   	<update id="update">
   	update notice set title = #{title}, content = #{content}, filename = #{filename, jdbcType=VARCHAR}, filepath = #{filepath, jdbcType=VARCHAR}
   	where id = #{id}
 
   	</update>
-  	
-  	
   	
   	<!-- 공지글 신규저장처리 -->
   	<insert id="insert">
@@ -27,26 +60,89 @@
   	</update>
   	
 
-  	<!-- 공지글정보조회 -->
-  	<select id="detail" resultType="notice.NoticeDTO">
-  	select m.name, notice.* from notice inner join member m on notice.writer = m.userid
-  	where id = #{id}
-  	</select>
+	<!-- 공지글정보조회 -->
+	<select id='detail' resultType="notice.NoticeDTO">
+	select name, notice.* 
+	from notice inner join member m
+	on notice.writer = m.userid
+	where id = #{id}
+	</select>
   
-  	<!-- 공지글목록조회 -->
-  	<select id="list" resultType="notice.NoticeDTO">
-  	select rownum no, n.* 
-  	from (select name, n.*
-      	  from notice n inner Join member m
-          on n.writer = m.userid
-          order by id) n
-	order by no desc
+<!-- 검색조건 -->
+<sql id='search_where'>
+<!-- 산책이라는 문자를 검색하기 위한 조건절 -->
+<if test='search == "title" or search=="content"'>
+where ${search} like '%' || #{keyword} || '%'
+</if>
+<if test='search==""'> <!-- 전체 -->
+where title like '%' || #{keyword} || '%'
+or content  like '%' || #{keyword} || '%'
+or <include refid="writer"/>
+</if>
+<if test='search=="writer"'>
+where <include refid="writer"/>
+</if>
+</sql>
+
+<sql id='writer'>
+writer in (select userid from member where name like '%' || #{keyword} || '%')
+</sql>
+
+  
+  	<!-- 공지글목록수조회 -->
+  	<select id="total" resultType="integer">
+  	select count(*) from notice <include refid="search_where"/>
+  	
   	</select>
   	
-  	<!-- select row_number() over(order by id) no, name, n.*
-from notice n inner join member m
-on n.writer = m.userid
-order by no desc; -->
+<!-- 공지글목록조회 -->
+<select id='list' resultType="notice.NoticeDTO">
+<!-- 페이지처리한 해당 페이지 글목록 -->
+select *
+from (select row_number() over(order by root, step desc) no, name, n.* 
+		from notice n inner join member m
+		on n.writer = m.userid <include refid="search_where"/>
+		order by no desc) n
+where no between #{beginList} and #{endList}
+
+
+
+<!-- select *
+from (select row_number() over(order by root, step desc) no, name, n.* 
+		from notice n, member m
+		where n.writer = m.userid
+		order by no desc) n
+where no between #{beginList} and #{endList}	
+ -->
+<!-- 페이지처리하지 않은 전체 글목록 -->
+<!--  
+select row_number() over(order by root, step desc) no, name, n.* 
+from notice n, member m
+where n.writer = m.userid
+order by no desc
+-->
+
+<!--  
+select rownum no, n.* 
+from (select name, n.*
+      from notice n inner join member m 
+      on n.writer = m.userid
+      order by id) n
+order by no desc
+-->
+
+<!--  
+from notice n, member m
+where n.writer = m.userid;
+
+select name, n.*
+from notice n inner join member m 
+on n.writer = m.userid;
+
+select (select name from member where n.writer = userid) name, n.*
+from notice n;
+-->
+</select>
   	
   </mapper>
   

@@ -11796,9 +11796,31 @@ input[type=radio] {
 
 #delete-file{ display: none; }
 
+.page-list{
+	display: flex;
+	justify-content: center;
+	line-height: 36px;
+	
+}
 
+.page-list span, .page-list a {
+	width: 38px; height: 38px;
+	border: 1px solid transparent;
+	margin: 1px;
+	text-align: center;
 
+}
 
+.page-list span{
+	border:1px solid #0040ff; 
+	color: #0040ff;
+	
+}
+
+.page-list a:hover {
+	background-color: rgba(0, 64, 255, 0.1);
+	color: #0040ff !important;
+}
 
 
 

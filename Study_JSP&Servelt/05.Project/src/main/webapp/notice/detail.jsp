@@ -37,7 +37,7 @@
 <%--  	<a class="btn-fill" href="delete.no?id=${dto.id}">정보삭제</a> --%>
  	<c:if test="${userInfo.userid eq dto.writer }">
  	<a class="btn-fill" href="modify.no?id=${dto.id}">정보수정</a>
- 	<a class="btn-fill" href="delete.no?id=${dto.id}">정보삭제</a>
+ 	<a class="btn-fill" onclick="if ( confirm('정말 삭제?')) href='delete.no?id=${dto.id}'">정보삭제</a>
  	</c:if>
  	<!-- 로그인된 경우 답글쓰기 가능 -->
  	<c:if test="${!empty userInfo }">

@@ -20,6 +20,14 @@
 
 </div>
 <%@ include file="/include/footer.jsp"%>
+
+
+웹브라우저 사용자 행위 
+> 브라우저의 주소가 변경
+> Controller
+> Command
+> DAO
+> mapper 태그
  
  
  
